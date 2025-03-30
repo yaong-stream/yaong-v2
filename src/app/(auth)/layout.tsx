@@ -23,9 +23,7 @@ export default function AuthLayout({
         </div>
 
         {/* 컨텐츠 */}
-        <div className="bg-card p-8 rounded-lg shadow-sm border">
-          {children}
-        </div>
+        {children}
       </div>
     </div>
   );
