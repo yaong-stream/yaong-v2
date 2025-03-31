@@ -1,51 +1,57 @@
 import { httpClient } from '@/lib';
-import {
-  ActiveSession,
-  AUTH_API_PATHS,
+import type {
   LoginRequest,
-  LogoutOtherDevicesRequest,
-  LogoutResponse,
-  RefreshTokenRequest,
   TokenResponse,
+  RefreshTokenRequest,
+  ActiveSession,
   VerifyEmailRequest,
-  VerifyEmailResponse,
 } from './auth.types';
 
+const AUTH_API_PATH = '/api/v1/auth';
+
 export async function login(data: LoginRequest): Promise<TokenResponse> {
-  const response = await httpClient.post<TokenResponse>(AUTH_API_PATHS.LOGIN, data);
-  return response.data;
+  const { data: response } = await httpClient.post(`${AUTH_API_PATH}/login`, data);
+  return response;
 }
 
-export async function verify(data: VerifyEmailRequest): Promise<VerifyEmailResponse> {
-  const response = await httpClient.get<VerifyEmailResponse>(AUTH_API_PATHS.VERIFY, {
-    params: data,
-  });
-  return response.data;
+export async function signin(data: LoginRequest): Promise<void> {
+  const { data: response } = await httpClient.post(`${AUTH_API_PATH}/signin`, data);
+  return response;
+}
+
+export async function signout(): Promise<void> {
+  const { data } = await httpClient.post(`${AUTH_API_PATH}/signout`);
+  return data;
 }
 
 export async function reissueAccessToken(data: RefreshTokenRequest): Promise<TokenResponse> {
-  const response = await httpClient.post<TokenResponse>(AUTH_API_PATHS.ACCESS_TOKEN, data);
-  return response.data;
+  const { data: response } = await httpClient.post(`${AUTH_API_PATH}/accesstoken`, data);
+  return response;
 }
 
 export async function reissueRefreshToken(data: RefreshTokenRequest): Promise<TokenResponse> {
-  const response = await httpClient.post<TokenResponse>(AUTH_API_PATHS.REFRESH_TOKEN, data);
-  return response.data;
+  const { data: response } = await httpClient.post(`${AUTH_API_PATH}/refreshtoken`, data);
+  return response;
 }
 
 export async function getActiveSessions(): Promise<ActiveSession[]> {
-  const response = await httpClient.get<ActiveSession[]>(AUTH_API_PATHS.SESSIONS);
-  return response.data;
+  const { data } = await httpClient.get(`${AUTH_API_PATH}/sessions`);
+  return data;
 }
 
-export async function logout(): Promise<LogoutResponse> {
-  const response = await httpClient.post<LogoutResponse>(AUTH_API_PATHS.LOGOUT);
-  return response.data;
-}
-
-export async function logoutOtherDevices(data: LogoutOtherDevicesRequest): Promise<LogoutResponse> {
-  const response = await httpClient.post<LogoutResponse>(AUTH_API_PATHS.LOGOUT_OTHER, null, {
-    params: { device_ids: data.deviceIds },
+export async function logoutOtherDevices(deviceIds: string[]): Promise<{ success: boolean }> {
+  const { data } = await httpClient.post(`${AUTH_API_PATH}/logout/other`, null, {
+    params: { device_ids: deviceIds },
   });
-  return response.data;
-} 
+  return data;
+}
+
+export async function logout(): Promise<{ success: boolean }> {
+  const { data } = await httpClient.post(`${AUTH_API_PATH}/logout`);
+  return data;
+}
+
+export async function verifyEmail(params: VerifyEmailRequest): Promise<{ success: boolean }> {
+  const { data } = await httpClient.get(`${AUTH_API_PATH}/verify`, { params });
+  return data;
+}

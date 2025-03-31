@@ -3,19 +3,6 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface RefreshTokenRequest {
-  refreshToken: string;
-}
-
-export interface VerifyEmailRequest {
-  email: string;
-  code: string;
-}
-
-export interface LogoutOtherDevicesRequest {
-  deviceIds: string[];
-}
-
 export interface TokenResponse {
   accessToken: string;
   accessTokenExpireDate: string;
@@ -23,12 +10,8 @@ export interface TokenResponse {
   refreshTokenExpireDate: string;
 }
 
-export interface VerifyEmailResponse {
-  success: boolean;
-}
-
-export interface LogoutResponse {
-  success: boolean;
+export interface RefreshTokenRequest {
+  refreshToken: string;
 }
 
 export interface ActiveSession {
@@ -38,6 +21,19 @@ export interface ActiveSession {
   browserName: string;
   browserVersion: string;
   loginAt: string;
+}
+
+export interface VerifyEmailRequest {
+  email: string;
+  code: string;
+}
+
+export interface VerifyEmailResponse {
+  success: boolean;
+}
+
+export interface LogoutResponse {
+  success: boolean;
 }
 
 export interface User {

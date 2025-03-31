@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { LoginForm } from "./_components/login-form";
-import { useLogin } from "@/hooks/api/auth/mutations";
+import { useSignin } from "@/hooks/api/auth/mutations";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useState } from "react";
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const login = useLogin();
+  const {mutateAsync: signin} = useSignin();
   const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -21,7 +21,7 @@ export default function LoginPage() {
       const email = formData.get("email") as string;
       const password = formData.get("password") as string;
 
-      await login.mutateAsync({
+      await signin({
         email,
         password,
       });

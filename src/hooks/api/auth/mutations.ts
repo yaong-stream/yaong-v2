@@ -1,31 +1,67 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { login, logout, logoutOtherDevices, verify } from '@/services/auth/auth.service';
+import type { UseMutationOptions } from '@tanstack/react-query';
+import {
+  login,
+  signin,
+  signout,
+  logout,
+  logoutOtherDevices,
+  reissueAccessToken,
+  reissueRefreshToken,
+  verifyEmail,
+} from '@/services';
 import type {
   LoginRequest,
-  LogoutOtherDevicesRequest,
-  VerifyEmailRequest,
-} from '@/services/auth/auth.types';
+  TokenResponse,
+  RefreshTokenRequest,
+  VerifyEmailRequest
+} from '@/services';
 import { authKeys } from './keys';
 
-export const useLogin = () => {
+export const useLogin = (
+  options?: UseMutationOptions<TokenResponse, Error, LoginRequest>
+) => {
   return useMutation({
     mutationFn: login,
+    ...options,
   });
 };
 
-export const useVerifyEmail = () => {
+export const useSignin = (
+  options?: UseMutationOptions<void, Error, LoginRequest>
+) => {
   return useMutation({
-    mutationFn: verify,
+    mutationFn: signin,
+    ...options,
   });
 };
 
-export const useLogout = () => {
+export const useSignout = (
+  options?: UseMutationOptions<void, Error, void>
+) => {
+  return useMutation({
+    mutationFn: signout,
+    ...options,
+  });
+};
+
+export const useLogout = (
+  options?: UseMutationOptions<{ success: boolean }, Error, void>
+) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: logout,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: authKeys.all });
+    },
+    ...options,
   });
 };
 
-export const useLogoutOtherDevices = () => {
+export const useLogoutOtherDevices = (
+  options?: UseMutationOptions<{ success: boolean }, Error, string[]>
+) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -33,5 +69,33 @@ export const useLogoutOtherDevices = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: authKeys.sessions() });
     },
+    ...options,
   });
-}; 
+};
+
+export const useReissueAccessToken = (
+  options?: UseMutationOptions<TokenResponse, Error, RefreshTokenRequest>
+) => {
+  return useMutation({
+    mutationFn: reissueAccessToken,
+    ...options,
+  });
+};
+
+export const useReissueRefreshToken = (
+  options?: UseMutationOptions<TokenResponse, Error, RefreshTokenRequest>
+) => {
+  return useMutation({
+    mutationFn: reissueRefreshToken,
+    ...options,
+  });
+};
+
+export const useVerifyEmail = (
+  options?: UseMutationOptions<{ success: boolean }, Error, VerifyEmailRequest>
+) => {
+  return useMutation({
+    mutationFn: verifyEmail,
+    ...options,
+  });
+};
