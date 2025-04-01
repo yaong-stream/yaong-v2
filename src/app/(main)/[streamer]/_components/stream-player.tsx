@@ -9,15 +9,16 @@ import { VideoPlayer } from "./video-player";
 interface StreamPlayerProps {
   stream: StreamDto;
 }
-
 export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
   return (
     <div className="space-y-4 p-4">
       {/* 비디오 플레이어 */}
       <div className="aspect-video relative bg-muted rounded-md">
-        <div className="absolute top-2 left-2 px-2 py-1 bg-red-500 rounded-md">
-          {stream.isLive && <span className="text-xs font-semibold text-background">LIVE</span>}
-        </div>
+        {stream.isLive && <div className="absolute top-2 left-2 px-2 py-1 bg-red-500 rounded-md">
+          <span className="text-xs font-semibold text-background">
+            LIVE
+          </span>
+        </div>}
         <VideoPlayer
           streamKey={stream.streamKey}
         />
@@ -37,7 +38,7 @@ export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
           <h2 className="text-lg font-semibold text-foreground">
             {stream.name}
           </h2>
-          <p className="text-sm text-muted-foreground">고양이냥보</p>
+          <p className="text-sm text-muted-foreground">{stream.streamer.nickname}</p>
           <div className="flex gap-2 mt-2">
             {["마인크래프트", "서바이벌", "힐링"].map((tag) => (
               <span

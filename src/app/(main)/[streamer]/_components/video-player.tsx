@@ -16,7 +16,7 @@ export const VideoPlayer = ({
   return (
     <Fragment>
       <div
-        className="absolute inset-0 rounded-md overflow-hidden"
+        className="absolute inset-0 rounded-md aspect-video overflow-hidden grid scale-100"
         ref={videoRef}
       />
       <Script
@@ -24,7 +24,7 @@ export const VideoPlayer = ({
         onLoad={() => {
           (window as any).mistPlay(streamKey, {
             target: videoRef.current,
-          })
+          });
         }}
       />
     </Fragment>
