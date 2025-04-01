@@ -1,4 +1,4 @@
-import { MemberDto } from '../member/member.types';
+import { Member } from '../member/member.types';
 
 export interface StreamInfo {
   name: string;
@@ -6,11 +6,13 @@ export interface StreamInfo {
 }
 
 export interface StreamDto {
+  id: number;
   name: string;
   description: string;
   thumbnailImage: string;
   isLive: boolean;
-  streamer: MemberDto;
+  streamKey: string;
+  streamer: Member;
 }
 
 export interface UpdateStreamInfoRequest {
