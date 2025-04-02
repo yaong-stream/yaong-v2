@@ -22,7 +22,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                 </header>
 
                 {/* 메인 컨텐츠 */}
-                <main className="flex-1 overflow-auto bg-background">
+                <main className="flex-1 overflow-y-auto bg-background">
                     {children}
                 </main>
             </div>
