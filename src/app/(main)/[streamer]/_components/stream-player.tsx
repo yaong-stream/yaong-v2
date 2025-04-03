@@ -4,12 +4,44 @@ import { UserAvatar } from "@/components/user-avatar"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { StreamDto } from "@/services";
-import { VideoPlayer } from "./video-player";
+import { VideojsPlayer, VideoPlayer } from "./video-player";
 
 interface StreamPlayerProps {
   stream: StreamDto;
 }
 export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
+
+
+  const options = {
+    autoplay: true,
+    controls: true,
+    responsive: true,
+    fluid: true,
+    experimentalSvgIcons: true,
+    sources: [
+      { 
+        src: `https://mist.narumir.io/hls/${stream.streamKey}/index.m3u8`,
+        type: 'application/x-mpegURL'
+      },
+    ],
+  };
+
+  const onReadyPlayer = (player: VideojsPlayer) => {
+
+    player.on('waiting', () => {
+      console.log('player is waiting');
+    });
+
+    player.on('playing', () => {
+      console.log('player is going now');
+    });
+
+    player.on('dispose', () => {
+      console.log('player will dispose');
+    });
+
+  }
+
   return (
     <div className="space-y-4 p-4">
       {/* 비디오 플레이어 */}
@@ -20,7 +52,8 @@ export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
           </span>
         </div>}
         <VideoPlayer
-          streamKey={stream.streamKey}
+          options={options}
+          onReady={onReadyPlayer}
         />
         <div className="absolute bottom-2 right-2 px-2 py-1 bg-background/60 rounded-md">
           <span className="text-xs font-semibold text-background-foreground">1,244 시청</span>

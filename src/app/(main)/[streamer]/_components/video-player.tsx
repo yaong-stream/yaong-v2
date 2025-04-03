@@ -1,33 +1,61 @@
-"use client";
+'use client';
 
-import Script from "next/script";
-import {
-  Fragment,
-  useRef,
-} from "react";
+import { FC, useEffect, useRef } from "react";
+import videojs from "video.js";
+import Player from "video.js/dist/types/player";
+import "video.js/dist/video-js.css";
 
-type VideoPlayerProps = {
-  streamKey: string,
+
+export type VideoPlayerProps = {
+    options: typeof videojs.options;
+    onReady?: (player: Player) => void;
+}
+
+export type VideojsPlayer = Player;
+
+const VideoPlayer: FC<VideoPlayerProps> = ({ options, onReady }) => {
+
+    const videoRef = useRef<HTMLDivElement | null>(null);
+    const playerRef = useRef<Player | null>(null);
+
+    useEffect(() => {
+
+        if (!playerRef.current) {
+            const videoElement = document.createElement("video-js");
+
+            videoElement.classList.add('vjs-big-play-centered');
+            videoRef?.current?.appendChild(videoElement);
+
+            const player = playerRef.current = videojs(videoElement, options, () => {
+                videojs.log('player is ready');
+                onReady?.(player);
+            });
+        } else {
+            const player = playerRef.current;
+            player.autoplay(options?.autoplay);
+            player.src(options?.sources);
+        }
+    }, [options, onReady]);
+
+    useEffect(() => {
+
+        const player = playerRef.current;
+
+        return () => {
+            if (player && !player.isDisposed()) {
+                player.dispose();
+                playerRef.current = null;
+            }
+
+        };
+    }, [playerRef]);
+
+    return (
+        <div data-vjs-player style={{ width: "100%" }}>
+            <div ref={videoRef} />
+        </div>
+    );
 };
-export const VideoPlayer = ({
-  streamKey,
-}: VideoPlayerProps) => {
-  const videoRef = useRef<HTMLDivElement>(null);
-  return (
-    <Fragment>
-      <div
-        className="absolute inset-0 rounded-md aspect-video overflow-hidden grid scale-100"
-        ref={videoRef}
-      />
-      <Script
-        src="https://mist.narumir.io/player.js"
-        onLoad={() => {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (window as any).mistPlay(streamKey, {
-            target: videoRef.current,
-          });
-        }}
-      />
-    </Fragment>
-  );
-};
+
+
+export { VideoPlayer };
