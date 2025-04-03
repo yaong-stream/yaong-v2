@@ -13,16 +13,14 @@ import {
 import { useMe } from '@/hooks/api/member/useMember';
 import { UserAvatar } from '@/components/user-avatar';
 import { useSignout } from '@/hooks/api';
-import { useRouter } from 'next/navigation';
 
 export function Header() {
-  const navigation = useRouter();
   const { isLoading, data } = useMe();
   const { mutateAsync: signout } = useSignout();
   const signoutHandler = async () => {
     const result = await signout();
     if (result.success) {
-      navigation.refresh();
+      location.reload();
     }
   };
   return (
