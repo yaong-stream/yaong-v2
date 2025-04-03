@@ -4,13 +4,14 @@ import { cn } from "@/lib/utils"
 interface UserAvatarProps {
   username: string;
   imageUrl: string;
-  size?: "default" | "lg" | "sm";
+  size?: "default" | "lg" | "md" | "sm";
   className?: string;
 }
 
 const sizes = {
   default: "h-8 w-8",
   lg: "h-12 w-12",
+  md: "h-8 w-8",
   sm: "h-6 w-6",
 }
 
@@ -28,4 +29,4 @@ export const UserAvatar = ({
       </AvatarFallback>
     </Avatar>
   )
-} 
+}
