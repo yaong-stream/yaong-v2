@@ -1,10 +1,11 @@
 import { httpClient } from '@/lib';
-import type {
+import {
   LoginRequest,
   TokenResponse,
   RefreshTokenRequest,
   ActiveSession,
   VerifyEmailRequest,
+  LogoutResponse,
 } from './auth.types';
 
 const AUTH_API_PATH = '/api/v1/auth';
@@ -19,7 +20,7 @@ export async function signin(data: LoginRequest): Promise<void> {
   return response;
 }
 
-export async function signout(): Promise<void> {
+export async function signout(): Promise<LogoutResponse> {
   const { data } = await httpClient.post(`${AUTH_API_PATH}/signout`);
   return data;
 }

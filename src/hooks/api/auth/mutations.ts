@@ -4,7 +4,6 @@ import {
   login,
   signin,
   signout,
-  logout,
   logoutOtherDevices,
   reissueAccessToken,
   reissueRefreshToken,
@@ -37,21 +36,11 @@ export const useSignin = (
 };
 
 export const useSignout = (
-  options?: UseMutationOptions<void, Error, void>
-) => {
-  return useMutation({
-    mutationFn: signout,
-    ...options,
-  });
-};
-
-export const useLogout = (
   options?: UseMutationOptions<{ success: boolean }, Error, void>
 ) => {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: logout,
+    mutationFn: signout,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: authKeys.all });
     },

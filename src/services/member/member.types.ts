@@ -25,4 +25,5 @@ export interface Member {
 export const MEMBER_API_PATHS = {
   SIGNUP: '/api/v1/members/signup',
   WITHDRAW: '/api/v1/members/withdraw',
-} as const; 
+  ME: '/api/v1/members',
+} as const;
