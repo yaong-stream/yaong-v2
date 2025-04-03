@@ -37,7 +37,7 @@ export const StreamChat = ({ streamId }: StreamChatProps) => {
   };
 
   useEffect(() => {
-    socketRef.current = io('http://localhost:4000/chat', { transports: ['websocket'], withCredentials: true });
+    socketRef.current = io(`${process.env.NEXT_PUBLIC_API_URL}/chat`, { transports: ['websocket'], withCredentials: true });
     socketRef.current.emit('chat-join', {
       streamId,
     });
@@ -50,7 +50,7 @@ export const StreamChat = ({ streamId }: StreamChatProps) => {
         socketRef.current.disconnect();
       }
     };
-  }, []);
+  }, [streamId]);
   return (
     <div className="flex flex-col h-full">
       {/* 채팅 헤더 */}

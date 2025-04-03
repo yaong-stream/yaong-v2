@@ -5,13 +5,7 @@ import { StreamChat } from "./_components/stream-chat";
 import { useParams } from "next/navigation";
 import { useStream } from "@/hooks/api/stream";
 
-interface StreamPageProps {
-  params: Promise<{
-    streamer: string;
-  }>;
-}
-
-export default function StreamPage({ params }: StreamPageProps) {
+export default function StreamPage() {
   const { streamer } = useParams();
   const { isLoading, data } = useStream(streamer?.toString() || '');
   if (isLoading || data == null) {

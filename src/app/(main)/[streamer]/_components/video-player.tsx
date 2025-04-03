@@ -22,6 +22,7 @@ export const VideoPlayer = ({
       <Script
         src="https://mist.narumir.io/player.js"
         onLoad={() => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (window as any).mistPlay(streamKey, {
             target: videoRef.current,
           });
