@@ -26,10 +26,10 @@ export const useLiveStreams = (
 };
 
 export const useFollowings = (
-  options?: UseQueryOptions<FollowingsResponse[], Error, FollowingsResponse[], ReturnType<typeof streamKeys.lists>>,
+  options?: UseQueryOptions<FollowingsResponse[], Error, FollowingsResponse[], ReturnType<typeof streamKeys.followers>>,
 ) => {
   return useQuery({
-    queryKey: streamKeys.lists(),
+    queryKey: streamKeys.followers(),
     queryFn: getFollowings,
     ...options,
   });
