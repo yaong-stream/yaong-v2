@@ -1,5 +1,5 @@
 import { httpClient } from '@/lib';
-import { StreamDto, UpdateStreamInfoRequest } from './stream.types';
+import { IsFollowingResponse, StreamDto, UpdateStreamInfoRequest } from './stream.types';
 
 const STREAM_API_PATH = '/api/v1/streams';
 
@@ -24,6 +24,16 @@ export async function getLiveStreams(): Promise<StreamDto[]> {
 }
 
 export async function getStream(streamerName: string): Promise<StreamDto> {
-  const { data } = await httpClient.get(`${STREAM_API_PATH}/${streamerName}`);
+  const { data } = await httpClient.get(`${STREAM_API_PATH}/info?streamer_name=${streamerName}`);
   return data;
-} 
+}
+
+export async function getFollowings() {
+  const { data } = await httpClient.get(`${STREAM_API_PATH}/followings`);
+  return data;
+}
+
+export async function isFollowingStream(streamId: number) {
+  const { data } = await httpClient.get<IsFollowingResponse>(`${STREAM_API_PATH}/${streamId}/following`);
+  return data;
+}
