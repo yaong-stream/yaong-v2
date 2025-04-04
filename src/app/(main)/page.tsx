@@ -1,27 +1,35 @@
 'use client';
 
-import { StreamCard } from "./_components/stream-card";
-import { useCategories } from "@/hooks/api/category";
-import { useLiveStreams } from "@/hooks/api/stream";
-import { AlertCircle } from "lucide-react";
+import {
+  AlertCircle,
+} from "lucide-react";
+import {
+  StreamCard,
+} from "./_components/stream-card";
+import {
+  useCategories,
+} from "@/hooks/api/category";
+import {
+  useLiveStreams,
+} from "@/hooks/api/stream";
 
 export default function HomePage() {
   const { data: categories, isLoading: isCategoriesLoading } = useCategories();
   const { data: streams, isLoading: isStreamsLoading } = useLiveStreams();
 
   return (
-    <div className="container mx-auto px-4 py-6">
+    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
       {/* 인기 라이브 스트림 섹션 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-bold mb-4">인기 라이브 스트림</h2>
+      <section className="mb-6 sm:mb-8">
+        <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">인기 라이브 스트림</h2>
         {isStreamsLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="aspect-video bg-muted rounded-lg animate-pulse" />
             ))}
           </div>
         ) : streams && streams.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 sm:gap-4">
             {streams.map((stream) => (
               <StreamCard
                 key={stream.id}
@@ -48,9 +56,9 @@ export default function HomePage() {
 
       {/* 카테고리 섹션 */}
       <section>
-        <h2 className="text-xl font-bold mb-4">카테고리</h2>
+        <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">카테고리</h2>
         {isCategoriesLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-4">
             {Array.from({ length: 12 }).map((_, i) => (
               <div key={i} className="bg-card rounded-lg overflow-hidden animate-pulse">
                 <div className="aspect-square bg-muted"></div>
@@ -61,7 +69,7 @@ export default function HomePage() {
             ))}
           </div>
         ) : categories && categories.length > 0 ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-4">
             {categories.map((category) => (
               <div key={category.id} className="bg-card rounded-lg overflow-hidden hover:bg-accent/50 transition-colors">
                 <div className="aspect-square bg-muted relative">
