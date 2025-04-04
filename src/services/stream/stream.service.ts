@@ -24,7 +24,7 @@ export async function getLiveStreams(): Promise<StreamDto[]> {
 }
 
 export async function getStream(streamerName: string): Promise<StreamDto> {
-  const { data } = await httpClient.get(`${STREAM_API_PATH}/info?streamer_name=${streamerName}`);
+  const { data } = await httpClient.get(`${STREAM_API_PATH}/${streamerName}`);
   return data;
 }
 

@@ -1,48 +1,90 @@
-import { StreamCard } from "./_components/stream-card";
+'use client';
 
-// 더미 데이터
-const DUMMY_STREAMS = Array.from({ length: 8 }).map((_, i) => ({
-  id: `stream-${i}`,
-  title: `즐거운 스트림 ${i + 1}`,
-  streamer: {
-    id: `streamer-${i}`,
-    name: `스트리머 ${i + 1}`,
-  },
-  category: ["게임", "음악", "일상", "요리"][i % 4],
-  viewerCount: Math.floor(Math.random() * 10000),
-}));
+import { StreamCard } from "./_components/stream-card";
+import { useCategories } from "@/hooks/api/category";
+import { useLiveStreams } from "@/hooks/api/stream";
+import { AlertCircle } from "lucide-react";
 
 export default function HomePage() {
+  const { data: categories, isLoading: isCategoriesLoading } = useCategories();
+  const { data: streams, isLoading: isStreamsLoading } = useLiveStreams();
+
   return (
     <div className="container mx-auto px-4 py-6">
       {/* 인기 라이브 스트림 섹션 */}
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-4">인기 라이브 스트림</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {DUMMY_STREAMS.map((stream) => (
-            <StreamCard
-              key={stream.id}
-              {...stream}
-            />
-          ))}
-        </div>
+        {isStreamsLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="aspect-video bg-muted rounded-lg animate-pulse" />
+            ))}
+          </div>
+        ) : streams && streams.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {streams.map((stream) => (
+              <StreamCard
+                key={stream.id}
+                id={stream.id.toString()}
+                title={stream.name}
+                streamer={{
+                  id: stream.streamer.id.toString(),
+                  name: stream.streamer.nickname,
+                  avatarUrl: stream.streamer.profileImage
+                }}
+                category={stream.category?.name || "기타"}
+                thumbnailUrl={stream.thumbnailImage}
+                viewerCount={0}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center p-10 bg-muted/10 rounded-lg">
+            <AlertCircle className="h-10 w-10 text-muted-foreground mb-4" />
+            <p className="text-muted-foreground text-sm">현재 진행 중인 라이브 스트림이 없습니다.</p>
+          </div>
+        )}
       </section>
 
       {/* 카테고리 섹션 */}
       <section>
         <h2 className="text-xl font-bold mb-4">카테고리</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
-          {/* 카테고리 카드 더미 데이터 */}
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="bg-card rounded-lg overflow-hidden hover:bg-accent/50 transition-colors">
-              <div className="aspect-square bg-muted"></div>
-              <div className="p-3">
-                <h3 className="font-medium">카테고리 {i + 1}</h3>
-                <p className="text-sm text-muted-foreground">시청자 1.2만명</p>
+        {isCategoriesLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <div key={i} className="bg-card rounded-lg overflow-hidden animate-pulse">
+                <div className="aspect-square bg-muted"></div>
+                <div className="p-3">
+                  <div className="h-5 bg-muted rounded w-2/3"></div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : categories && categories.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+            {categories.map((category) => (
+              <div key={category.id} className="bg-card rounded-lg overflow-hidden hover:bg-accent/50 transition-colors">
+                <div className="aspect-square bg-muted relative">
+                  {category.thumbnailImage && (
+                    <img
+                      src={category.thumbnailImage}
+                      alt={category.name}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+                <div className="p-3">
+                  <h3 className="font-medium">{category.name}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center p-10 bg-muted/10 rounded-lg">
+            <AlertCircle className="h-10 w-10 text-muted-foreground mb-4" />
+            <p className="text-muted-foreground text-sm">등록된 카테고리가 없습니다.</p>
+          </div>
+        )}
       </section>
     </div>
   );

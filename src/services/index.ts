@@ -16,3 +16,6 @@ export * from './stream/stream.types';
 
 export * from './member/member.service';
 export * from './member/member.types';
+
+export * from './category/category.service';
+export * from './category/category.types';
