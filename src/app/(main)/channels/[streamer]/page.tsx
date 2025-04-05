@@ -32,7 +32,7 @@ export default function StreamPage() {
       </div>
 
       {/* 모바일 레이아웃 */}
-      <div className="md:hidden flex flex-col h-full">
+      <div className="md:hidden flex flex-col h-full overflow-y-hidden">
         {/* 스트림 플레이어 영역 */}
         <div className="flex-1 bg-background overflow-y-auto">
           <StreamPlayer
