@@ -26,7 +26,7 @@ export function Sidebar() {
           <h3 className="px-4 text-sm font-semibold text-muted-foreground uppercase">메인</h3>
           <ul className="mt-2 space-y-1">
             <li>
-              <Link href="/" className={`flex items-center px-4 py-2 text-sm rounded-md hover:bg-accent/50`}>
+              <Link href="/followings" className={`flex items-center px-4 py-2 text-sm rounded-md hover:bg-accent/50`}>
                 <span>팔로잉</span>
               </Link>
             </li>
