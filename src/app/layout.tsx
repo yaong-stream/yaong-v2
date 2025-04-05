@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import { Providers } from "./providers";
 import "./globals.css";
+import { ReactNode } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const pretendard = localFont({
+  src: "../../public/fonts/Pretendard-Variable.woff2",
+  variable: "--font-pretendard",
+});
 
 export const metadata: Metadata = {
   title: "야옹 스트림",
@@ -14,11 +18,11 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="ko" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${pretendard.className}`}>
         <Providers>
           <Toaster />
           {children}
