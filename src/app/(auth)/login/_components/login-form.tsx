@@ -1,13 +1,63 @@
 'use client';
 
-interface LoginFormProps {
-  isLoading: boolean;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+import {
+  useSignin,
+} from '@/hooks/api';
+import {
+  AxiosError,
+} from 'axios';
+import {
+  useRouter,
+} from 'next/navigation';
+import {
+  useState,
+} from 'react';
+import {
+  useForm,
+} from 'react-hook-form';
+import {
+  toast,
+} from 'sonner';
 
-export function LoginForm({ isLoading, onSubmit }: LoginFormProps) {
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+export function LoginForm() {
+  const router = useRouter();
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginFormValues>();
+  const [isLoading, setIsLoading] = useState(false);
+  const { mutateAsync: signin } = useSignin({
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 401) {
+          toast.error('이메일 또는 비밀번호가 일치하지 않습니다.');
+        } else {
+          toast.error('로그인에 실패했습니다. 다시 시도해주세요.');
+        }
+      }
+      setIsLoading(false);
+    },
+  });
+
+  const onSubmit = async (data: { email: string; password: string }) => {
+    setIsLoading(true);
+
+    await signin({
+      email: data.email,
+      password: data.password,
+    });
+
+    toast.success('로그인이 완료되었습니다.');
+    router.push('/');
+
+    setIsLoading(false);
+  }
   return (
-    <form onSubmit={onSubmit} className="space-y-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4"
+    >
       <div className="space-y-2">
         <label
           htmlFor="email"
@@ -17,13 +67,15 @@ export function LoginForm({ isLoading, onSubmit }: LoginFormProps) {
         </label>
         <input
           id="email"
-          name="email"
           type="email"
           placeholder="name@example.com"
           className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
           disabled={isLoading}
-          required
+          {...register('email', { required: '이메일을 입력해주세요.' })}
         />
+        {errors.email && (
+          <p className="text-sm text-destructive">{errors.email.message}</p>
+        )}
       </div>
       <div className="space-y-2">
         <label
@@ -34,12 +86,14 @@ export function LoginForm({ isLoading, onSubmit }: LoginFormProps) {
         </label>
         <input
           id="password"
-          name="password"
           type="password"
           className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
           disabled={isLoading}
-          required
+          {...register('password', { required: '비밀번호를 입력해주세요.' })}
         />
+        {errors.password && (
+          <p className="text-sm text-destructive">{errors.password.message}</p>
+        )}
       </div>
       <button
         type="submit"
@@ -50,4 +104,4 @@ export function LoginForm({ isLoading, onSubmit }: LoginFormProps) {
       </button>
     </form>
   );
-} 
+}

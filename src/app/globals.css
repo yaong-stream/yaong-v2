@@ -62,10 +62,6 @@
   }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   :root {
     --radius: 0.625rem;
