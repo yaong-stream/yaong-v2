@@ -14,7 +14,7 @@ export default function FollowingsPage() {
   const { isLoading, data: followings } = useFollowings();
 
   return (
-    <div className="container py-6 px-4 mx-auto">
+    <div className="container px-6 py-8">
       <div className="space-y-6">
         <div className="space-y-2">
           <h1 className="text-2xl font-semibold tracking-tight">
