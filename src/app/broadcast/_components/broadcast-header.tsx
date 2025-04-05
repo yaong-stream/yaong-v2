@@ -18,7 +18,7 @@ interface BroadcastHeaderProps {
 
 export function BroadcastHeader({ onMenuClick }: BroadcastHeaderProps) {
   return (
-    <header className="h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="min-h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-full items-center px-4 gap-4">
         <Button
           variant="ghost"

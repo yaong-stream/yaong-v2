@@ -14,7 +14,7 @@ export default function BroadcastLayout({
   return (
     <div className="h-screen flex flex-col">
       <BroadcastHeader onMenuClick={() => setIsSidebarOpen(true)} />
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex">
         <BroadcastSidebar
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
