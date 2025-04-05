@@ -14,6 +14,7 @@ export interface StreamDto {
   streamKey: string;
   category?: Category;
   streamer: Member;
+  followers: number;
 }
 
 export interface  Category {

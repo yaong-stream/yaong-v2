@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { StreamDto } from "@/services";
 import { VideojsPlayer, VideoPlayer } from "./video-player";
+import { compactNumberFormat } from "@/lib/utils";
 
 interface StreamPlayerProps {
   stream: StreamDto;
@@ -105,7 +106,7 @@ export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
               <h3 className="text-foreground font-semibold mb-2">채널 통계</h3>
               <div className="grid grid-cols-3 gap-4">
                 <div className="text-center">
-                  <p className="text-lg font-semibold text-foreground">12.5K</p>
+                  <p className="text-lg font-semibold text-foreground">{compactNumberFormat(stream.followers)}</p>
                   <p className="text-xs text-muted-foreground">팔로워</p>
                 </div>
                 <div className="text-center">
