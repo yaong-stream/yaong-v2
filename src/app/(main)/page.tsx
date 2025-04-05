@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import {
   AlertCircle,
 } from "lucide-react";
@@ -74,7 +75,7 @@ export default function HomePage() {
               <div key={category.id} className="bg-card rounded-lg overflow-hidden hover:bg-accent/50 transition-colors">
                 <div className="aspect-square bg-muted relative">
                   {category.thumbnailImage && (
-                    <img
+                    <Image
                       src={category.thumbnailImage}
                       alt={category.name}
                       className="absolute inset-0 w-full h-full object-cover"

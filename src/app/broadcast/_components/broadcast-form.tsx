@@ -20,12 +20,11 @@ export function BroadcastForm() {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState<string>('');
   const [description, setDescription] = useState('');
-  const [isLive, setIsLive] = useState(false);
 
   const handleStartBroadcast = async (e: React.FormEvent) => {
     e.preventDefault();
     // TODO: 방송 시작 로직 구현
-    console.log('방송 시작:', { title, category, description, isLive });
+    console.log('방송 시작:', { title, category, description });
   };
 
   return (

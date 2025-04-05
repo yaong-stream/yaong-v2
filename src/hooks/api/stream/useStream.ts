@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type { UseQueryOptions } from '@tanstack/react-query';
-import { getStream, getLiveStreams, getFollowings, FollowingsResponse, isFollowingStream } from '@/services';
+import { getStream, getLiveStreams, getFollowings, FollowingsResponse } from '@/services';
 import type { StreamDto } from '@/services';
 import { streamKeys } from './keys';
 
@@ -34,12 +34,3 @@ export const useFollowings = (
     ...options,
   });
 };
-
-// export const useIsFollowingStream = (streamId: number,
-//                                      options?: UseQueryOptions<FollowingsResponse[], Error, FollowingsResponse[], ReturnType<typeof streamKeys.lists>>
-// ) => {
-//   return useQuery({
-//     queryKey: streamKeys.details(),
-//     queryFn: isFollowingStream,
-//   });
-// };
