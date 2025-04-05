@@ -5,6 +5,8 @@ import {
 } from 'react';
 import {
   Menu,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import {
   Header,
@@ -19,19 +21,20 @@ interface MainLayoutProps {
 
 export default function MainLayout({ children }: MainLayoutProps) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggle = () => setIsSidebarOpen((prev) => !prev);
 
   return (
     <div className="flex h-screen">
       {/* 사이드바 오버레이 */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-background/80 z-40 md:hidden"
+          className="fixed inset-0 bg-background/80 z-40 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* 사이드바 */}
-      <aside className={`fixed md:static md:w-60 w-64 h-screen bg-card border-r border-border flex-shrink-0 transition-transform duration-300 ease-in-out z-50 overflow-y-auto ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+      <aside className={`fixed lg:static h-screen bg-card border-r border-border flex-shrink-0 transition-all duration-300 ease-in-out z-50 overflow-y-auto ${isSidebarOpen ? 'translate-x-0 w-64 lg:w-60' : '-translate-x-full lg:translate-x-0 lg:w-0'
         }`}>
         <div className="h-full">
           <Sidebar />
@@ -41,12 +44,22 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <div className="flex-1 flex flex-col">
         {/* 헤더 */}
         <header className="h-14 border-b border-border bg-card">
-          <div className="h-full flex items-center px-4 md:px-6">
+          <div className="h-full flex items-center px-4 lg:px-6">
             <button
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="md:hidden mr-4 p-2 hover:bg-accent/50 rounded-md"
+              onClick={() => toggle()}
+              className="lg:hidden mr-4 p-2 hover:bg-accent/50 rounded-md"
             >
               <Menu className="h-5 w-5" />
+            </button>
+            <button
+              onClick={() => toggle()}
+              className="hidden lg:block mr-4 p-2 hover:bg-accent/50 rounded-md"
+            >
+              {isSidebarOpen ? (
+                <ChevronLeft className="h-5 w-5" />
+              ) : (
+                <ChevronRight className="h-5 w-5" />
+              )}
             </button>
             <Header />
           </div>

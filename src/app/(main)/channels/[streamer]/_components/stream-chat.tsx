@@ -54,7 +54,7 @@ export const StreamChat = ({ streamId }: StreamChatProps) => {
   return (
     <div className="flex flex-col h-full">
       {/* 채팅 헤더 */}
-      <div className="p-4 border-b border-border">
+      <div className="hidden md:block p-4 border-b border-border">
         <h3 className="text-lg font-semibold text-foreground">스트림 채팅</h3>
       </div>
 
