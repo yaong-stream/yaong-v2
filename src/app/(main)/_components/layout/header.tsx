@@ -80,15 +80,15 @@ export function Header() {
                     />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-popover text-popover-foreground shadow-md rounded-md py-1">
+                <DropdownMenuContent className="bg-white shadow-lg rounded-md py-1">
                   <DropdownMenuItem asChild>
-                    <Link href="/mypage" className="px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                    <Link href="/mypage" className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                       마이페이지
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onSelect={signoutHandler}
-                    className="px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground cursor-pointer">
+                    className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
                     로그아웃
                   </DropdownMenuItem>
                 </DropdownMenuContent>
