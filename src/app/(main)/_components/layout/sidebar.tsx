@@ -7,13 +7,14 @@ import {
 import {
   UserAvatar,
 } from '@/components/user-avatar';
-import { selectIsSidebarOpen, selectToggleSidebar } from '@/store/ui';
+import { selectIsMaualSidebarOpen, selectIsSidebarOpen, selectToggleSidebar } from '@/store/ui';
 import { useStore } from '@/store/store';
 import { useCallback, useEffect } from 'react';
 import { BREAKPOINTS } from '@/constants';
 import { useWindowSize } from '@/hooks/ui';
 export function Sidebar() {
   const isSidebarOpen = useStore(selectIsSidebarOpen);
+  const isMaualSidebarOpen = useStore(selectIsMaualSidebarOpen);
   const toggleSidebar = useStore(selectToggleSidebar);
   
   const { width } = useWindowSize();
@@ -23,8 +24,10 @@ export function Sidebar() {
   useEffect(() => {
     if (width) {
       const isTabletMin = width <= BREAKPOINTS.MD.max;
-      // 큰 화면에서는 항상 열려있고, 작은 화면에서는 닫혀있도록 설정
-      toggleSidebar(!isTabletMin);
+      // 수동으로 접었을 때만 자동으로 접히고 펼쳐지도록 수정
+      if(!isMaualSidebarOpen) {  
+        toggleSidebar(!isTabletMin);
+      }
     }
   }, [width]); // toggleSidebar 의존성 제거
 
