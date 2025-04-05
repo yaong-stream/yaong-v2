@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import { ChevronRight, Eye, MessageSquare, Timer, Users } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default function BroadcastPage() {
   const [activePanel, setActivePanel] = useState<'chat' | 'viewers' | null>(null);
@@ -21,8 +22,8 @@ export default function BroadcastPage() {
         'h-full transition-[padding] duration-300',
         activePanel !== null && 'pr-[400px]',
       )}>
-        <div className="h-full p-6">
-          <div className="max-w-[1600px] mx-auto flex flex-col gap-6">
+        <ScrollArea className="h-full p-6">
+          <div className="mx-auto flex flex-col gap-6">
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-bold">방송 화면</h1>
@@ -103,7 +104,7 @@ export default function BroadcastPage() {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </ScrollArea>
       </div>
 
       <div

@@ -7,10 +7,10 @@ import { NotificationSettings } from './_components/notification-settings';
 
 export default function SettingsPage() {
   return (
-    <div className="p-6 max-w-[1000px] mx-auto">
+    <div className="p-6 mx-auto">
       <div className="flex flex-col gap-6">
         <div>
-          <h1 className="text-2xl font-bold">방송 설정</h1>
+          <h1 className="text-2xl font-bold">설정</h1>
           <p className="text-sm text-muted-foreground mt-1">
             방송과 관련된 모든 설정을 관리할 수 있습니다.
           </p>
@@ -18,7 +18,7 @@ export default function SettingsPage() {
 
         <Tabs defaultValue="stream" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="stream">방송 설정</TabsTrigger>
+            <TabsTrigger value="stream">스트림 설정</TabsTrigger>
             <TabsTrigger value="chat">채팅 설정</TabsTrigger>
             <TabsTrigger value="notification">알림 설정</TabsTrigger>
           </TabsList>
