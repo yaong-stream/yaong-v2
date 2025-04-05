@@ -19,7 +19,7 @@ export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
     fluid: true,
     experimentalSvgIcons: true,
     sources: [
-      { 
+      {
         src: `https://mist.narumir.io/hls/${stream.streamKey}/index.m3u8`,
         type: 'application/x-mpegURL'
       },
@@ -72,20 +72,21 @@ export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
             {stream.name}
           </h2>
           <p className="text-sm text-muted-foreground">{stream.streamer.nickname}</p>
-          <div className="flex gap-2 mt-2">
-            {["마인크래프트", "서바이벌", "힐링"].map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+
         </div>
         <Button variant="secondary" size="sm">
           팔로우
         </Button>
+      </div>
+      <div className="flex gap-2 mt-2">
+        {["마인크래프트", "서바이벌", "힐링"].map((tag) => (
+          <span
+            key={tag}
+            className="px-2 py-1 text-xs bg-muted text-muted-foreground rounded-md"
+          >
+            {tag}
+          </span>
+        ))}
       </div>
 
       {/* 채널 정보 및 공지사항 탭 */}
