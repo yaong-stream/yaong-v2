@@ -18,10 +18,15 @@ export function Sidebar() {
   
   const { width } = useWindowSize();
   
+  // 버그 수정: width가 변경될 때만 사이드바 상태를 변경하도록 수정
+  // 기존에는 width와 toggleSidebar 모두 의존성 배열에 있어서 무한 루프 가능성이 있었음
   useEffect(() => {
-    const isTabletMin = width <= BREAKPOINTS.MD.max;
-    toggleSidebar(!isTabletMin);
-  }, [width, toggleSidebar]);
+    if (width) {
+      const isTabletMin = width <= BREAKPOINTS.MD.max;
+      // 큰 화면에서는 항상 열려있고, 작은 화면에서는 닫혀있도록 설정
+      toggleSidebar(!isTabletMin);
+    }
+  }, [width]); // toggleSidebar 의존성 제거
 
   const handleOverlayClick = useCallback(() => {
     toggleSidebar(false);
@@ -30,7 +35,7 @@ export function Sidebar() {
   const followings = useFollowings();
   return (
     <>
-     {/* 사이드바 오버레이 */}
+     {/* 사이드바 오버레이 - 모바일에서만 표시 */}
      {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-background/80 z-40 lg:hidden"
@@ -38,8 +43,11 @@ export function Sidebar() {
         />
       )}
 
-      {/* 사이드바 */}
-      <aside className={`fixed lg:static h-screen bg-card border-r border-border flex-shrink-0 transition-all duration-300 ease-in-out z-50 overflow-y-auto ${isSidebarOpen ? 'translate-x-0 w-64 lg:w-60' : '-translate-x-full lg:translate-x-0 lg:w-0'
+      {/* 사이드바 - 트랜지션 처리 개선 */}
+      <aside className={`fixed lg:static h-screen bg-card border-r border-border flex-shrink-0 transition-all duration-300 ease-in-out z-50 overflow-y-auto 
+        ${isSidebarOpen 
+          ? 'translate-x-0 w-64 lg:w-60' 
+          : '-translate-x-full w-0 lg:translate-x-0 lg:w-0'
         }`}>
         <div className="h-full flex flex-col">
           {/* 로고 */}
