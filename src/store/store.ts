@@ -1,22 +1,27 @@
 'use client';
 
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
-import { createUIDomain, UIDomain } from './ui';
+import { createJSONStorage, persist, devtools, PersistOptions } from 'zustand/middleware';
+import { UISlice, createUISlice } from './ui';
 
-export type RootState = UIDomain;
+type Store = UISlice;
 
-export const useStore = create<RootState>()(
-  persist(
-    (set, get) => ({
-      ...createUIDomain(set, get),
-    }),
+type PersistedState = Pick<Store, 'isSidebarOpen'>;
+
+const persistOptions: PersistOptions<Store, PersistedState> = {
+  name: 'yaong-storage',
+  storage: createJSONStorage(() => localStorage),
+  partialize: (state) => ({
+    isSidebarOpen: state.isSidebarOpen,
+  }),
+};
+
+export const useStore = create<Store>()(
+  devtools(
+    persist(createUISlice, persistOptions),
     {
-      name: 'yaong-storage',
-      storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({
-        isSidebarOpen: state.isSidebarOpen,
-      }),
+      name: 'yaong',
+      enabled: true,
     }
   )
 ); 

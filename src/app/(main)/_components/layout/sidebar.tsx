@@ -7,14 +7,14 @@ import {
 import {
   UserAvatar,
 } from '@/components/user-avatar';
-import { selectIsSidebarOpen, selectSidebarToggle } from '@/store/ui';
+import { selectIsSidebarOpen, selectToggleSidebar } from '@/store/ui';
 import { useStore } from '@/store/store';
 import { useCallback, useEffect } from 'react';
 import { BREAKPOINTS } from '@/constants';
 import { useWindowSize } from '@/hooks/ui';
 export function Sidebar() {
   const isSidebarOpen = useStore(selectIsSidebarOpen);
-  const toggleSidebar = useStore(selectSidebarToggle);
+  const toggleSidebar = useStore(selectToggleSidebar);
   
   const { width } = useWindowSize();
   

@@ -30,11 +30,12 @@ import {
   useSignout,
 } from '@/hooks/api';
 import { useStore } from '@/store/store';
-import { selectIsSidebarOpen, selectSidebarToggle } from '@/store/ui';
+import { selectIsSidebarOpen, selectToggleSidebar } from '@/store/ui';
 
 export function Header() {
   const isSidebarOpen = useStore(selectIsSidebarOpen);
-  const toggleSidebar = useStore(selectSidebarToggle);
+  const toggleSidebar = useStore(selectToggleSidebar);
+  console.log('toggleSidebar', toggleSidebar);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { isLoading, data } = useMe();
   const { mutateAsync: signout } = useSignout();
