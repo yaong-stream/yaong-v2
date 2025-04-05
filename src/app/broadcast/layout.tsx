@@ -19,7 +19,7 @@ export default function BroadcastLayout({
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
         />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1">
           {children}
         </main>
       </div>

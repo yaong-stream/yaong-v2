@@ -52,9 +52,6 @@ export default function DashboardPage() {
               방송 현황과 통계를 한눈에 확인하세요.
             </p>
           </div>
-          <Button>
-            방송 시작하기
-          </Button>
         </div>
 
         {/* 통계 카드 */}

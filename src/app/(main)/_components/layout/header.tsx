@@ -86,6 +86,11 @@ export function Header() {
                       마이페이지
                     </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/broadcast" className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      방송하기
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem
                     onSelect={signoutHandler}
                     className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer">
