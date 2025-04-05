@@ -40,7 +40,7 @@ export function Header() {
 
   return (
     <>
-      <div className="h-full flex items-center justify-between w-full">
+      <div className="h-full flex items-center justify-between w-full gap-4">
         {/* 검색 */}
         <div className="flex-1 max-w-xl">
           {/* 데스크톱 검색창 */}
