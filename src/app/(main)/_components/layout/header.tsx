@@ -66,7 +66,7 @@ export function Header() {
         </div>
 
         {/* 우측 메뉴 */}
-        <div className="flex items-center space-x-4 ml-4">
+        <div className="flex items-center gap-4">
           <ThemeToggle />
           {!isLoading && (
             data ? (
@@ -80,7 +80,7 @@ export function Header() {
                     />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-popover text-popover-foreground shadow-md rounded-md py-1">
+                <DropdownMenuContent align="end" className="bg-popover text-popover-foreground shadow-md rounded-md py-1">
                   <DropdownMenuItem asChild>
                     <Link href="/mypage" className="px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground cursor-pointer">
                       마이페이지
@@ -139,4 +139,4 @@ export function Header() {
       )}
     </>
   );
-} 
+}
