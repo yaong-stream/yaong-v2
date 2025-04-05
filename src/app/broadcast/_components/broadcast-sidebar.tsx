@@ -63,7 +63,7 @@ export function BroadcastSidebar({ isOpen, onClose }: BroadcastSidebarProps) {
   const pathname = usePathname();
 
   const SidebarContent = () => (
-    <nav className="space-y-1">
+    <nav className="space-y-1 h-full">
       {menuItems.map((item) => {
         const isActive = pathname === item.href;
         const Icon = item.icon;

@@ -12,10 +12,10 @@ export default function BroadcastLayout({
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-screen flex flex-col">
       <BroadcastHeader onMenuClick={() => setIsSidebarOpen(true)} />
-      <div className="flex-1 flex">
-        <BroadcastSidebar 
+      <div className="flex-1 flex overflow-hidden">
+        <BroadcastSidebar
           isOpen={isSidebarOpen} 
           onClose={() => setIsSidebarOpen(false)} 
         />
