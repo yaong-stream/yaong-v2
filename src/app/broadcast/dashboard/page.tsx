@@ -3,14 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Users, 
-  Clock, 
-  MessageSquare, 
-  TrendingUp,
-  Gift,
-  Heart
-} from 'lucide-react';
+import { Clock, Gift, Heart, MessageSquare, Users } from 'lucide-react';
 
 // 임시 데이터
 const stats = [
@@ -18,26 +11,26 @@ const stats = [
     label: '현재 시청자',
     value: '1,234',
     change: '+12%',
-    icon: Users
+    icon: Users,
   },
   {
     label: '방송 시간',
     value: '02:34:15',
     change: '',
-    icon: Clock
+    icon: Clock,
   },
   {
     label: '채팅 수',
     value: '8,234',
     change: '+23%',
-    icon: MessageSquare
+    icon: MessageSquare,
   },
   {
     label: '팔로워',
     value: '45.2K',
     change: '+5%',
-    icon: Heart
-  }
+    icon: Heart,
+  },
 ];
 
 const recentActivities = [

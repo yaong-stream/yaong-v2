@@ -5,31 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  Users,
-  Search,
-  Shield,
-  UserX,
-  Clock,
-  Heart,
-  Star,
-  TrendingUp
-} from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Clock, Heart, Search, Shield, Star, Users, UserX } from 'lucide-react';
 
 // 임시 시청자 데이터
 const viewers = [
@@ -39,7 +17,7 @@ const viewers = [
     watchTime: '2시간 30분',
     status: '시청 중',
     type: 'viewer',
-    followedAt: '2024-01-15'
+    followedAt: '2024-01-15',
   },
   {
     id: 2,
@@ -47,7 +25,7 @@ const viewers = [
     watchTime: '1시간 45분',
     status: '시청 중',
     type: 'moderator',
-    followedAt: '2023-12-01'
+    followedAt: '2023-12-01',
   },
   {
     id: 3,
@@ -55,8 +33,8 @@ const viewers = [
     watchTime: '45분',
     status: '시청 중',
     type: 'subscriber',
-    followedAt: '2024-02-01'
-  }
+    followedAt: '2024-02-01',
+  },
 ];
 
 export default function ViewersPage() {
@@ -159,7 +137,8 @@ export default function ViewersPage() {
                   </SelectContent>
                 </Select>
                 <div className="relative">
-                  <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Search
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder="시청자 검색"
                     className="pl-8 w-[200px]"

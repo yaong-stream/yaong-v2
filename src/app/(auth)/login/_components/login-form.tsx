@@ -46,7 +46,7 @@ export function LoginForm({ isLoading, onSubmit }: LoginFormProps) {
         className="inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50"
         disabled={isLoading}
       >
-        {isLoading ? "로그인 중..." : "로그인"}
+        {isLoading ? '로그인 중...' : '로그인'}
       </button>
     </form>
   );

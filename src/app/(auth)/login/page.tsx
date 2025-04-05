@@ -1,15 +1,15 @@
 'use client';
 
-import Link from "next/link";
-import { LoginForm } from "./_components/login-form";
-import { useSignin } from "@/hooks/api/auth/mutations";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { useState } from "react";
+import Link from 'next/link';
+import { LoginForm } from './_components/login-form';
+import { useSignin } from '@/hooks/api/auth/mutations';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { useState } from 'react';
 
 export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
-  const {mutateAsync: signin} = useSignin();
+  const { mutateAsync: signin } = useSignin();
   const router = useRouter();
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -18,18 +18,18 @@ export default function LoginPage() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const email = formData.get("email") as string;
-      const password = formData.get("password") as string;
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
 
       await signin({
         email,
         password,
       });
 
-      toast.success("로그인이 완료되었습니다.");
-      router.push("/");
+      toast.success('로그인이 완료되었습니다.');
+      router.push('/');
     } catch (error) {
-      toast.error("로그인에 실패했습니다. 다시 시도해주세요.");
+      toast.error('로그인에 실패했습니다. 다시 시도해주세요.');
       console.error(error);
     } finally {
       setIsLoading(false);
