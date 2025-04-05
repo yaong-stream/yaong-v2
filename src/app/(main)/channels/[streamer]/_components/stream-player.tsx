@@ -44,7 +44,7 @@ export const StreamPlayer = ({ stream }: StreamPlayerProps) => {
   }
 
   return (
-    <div className="space-y-4 p-4">
+    <div>
       {/* 비디오 플레이어 */}
       <div className="aspect-video relative bg-muted rounded-md">
         {stream.isLive && <div className="absolute top-2 left-2 px-2 py-1 bg-red-500 rounded-md">
