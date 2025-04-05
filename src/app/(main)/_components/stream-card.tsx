@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface StreamCardProps {
   id: string;
   title: string;
   streamer: {
     id: string;
-    name: string;
-    avatarUrl?: string;
+    nickname: string;
+    profileImage: string;
   };
   category: string;
   thumbnailUrl?: string;
@@ -15,7 +16,6 @@ interface StreamCardProps {
 }
 
 export function StreamCard({
-  id,
   title,
   streamer,
   category,
@@ -23,7 +23,7 @@ export function StreamCard({
   viewerCount,
 }: StreamCardProps) {
   return (
-    <Link href={`/stream/${id}`} className="block group">
+    <Link href={`/channels/${streamer.nickname}`} className="block group">
       <div className="relative aspect-video bg-muted rounded-lg overflow-hidden">
         {thumbnailUrl ? (
           <Image
@@ -47,24 +47,19 @@ export function StreamCard({
       <div className="mt-3">
         <div className="flex items-start gap-3">
           <div className="flex-shrink-0">
-            <div className="w-9 h-9 rounded-full bg-muted overflow-hidden">
-              {streamer.avatarUrl && (
-                <Image
-                  src={streamer.avatarUrl}
-                  alt={streamer.name}
-                  width={36}
-                  height={36}
-                  className="object-cover"
-                />
-              )}
-            </div>
+            <Avatar className="w-9 h-9 rounded-full bg-muted overflow-hidden">
+              <AvatarImage src={streamer.profileImage} />
+              <AvatarFallback>
+                {streamer.nickname.slice(0, 1).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="font-medium truncate group-hover:text-primary transition-colors">
               {title}
             </h3>
             <p className="text-sm truncate">
-              {streamer.name}
+              {streamer.nickname}
             </p>
             <p className="text-sm text-muted-foreground">
               {category}

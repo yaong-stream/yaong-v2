@@ -37,8 +37,8 @@ export default function HomePage() {
                 title={stream.name}
                 streamer={{
                   id: stream.streamer.id.toString(),
-                  name: stream.streamer.nickname,
-                  avatarUrl: stream.streamer.profileImage
+                  nickname: stream.streamer.nickname,
+                  profileImage: stream.streamer.profileImage
                 }}
                 category={stream.category?.name || "기타"}
                 thumbnailUrl={stream.thumbnailImage}
