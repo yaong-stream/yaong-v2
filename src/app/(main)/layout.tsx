@@ -28,7 +28,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {/* 사이드바 오버레이 */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-background/80 z-40 md:hidden"
+          className="fixed inset-0 bg-background/80 z-40 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
