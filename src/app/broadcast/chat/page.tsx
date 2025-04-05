@@ -5,22 +5,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  MessageSquare,
-  Shield,
-  Clock,
-  Search,
-  Ban,
-  UserX,
-  MessageSquareOff
-} from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Ban, Clock, MessageSquare, MessageSquareOff, Search, Shield, UserX } from 'lucide-react';
 
 // 임시 채팅 데이터
 const chatMessages = [
@@ -29,7 +15,7 @@ const chatMessages = [
     user: '시청자123',
     message: '안녕하세요! 오늘도 좋은 방송 감사합니다 😊',
     time: '1분 전',
-    type: 'normal'
+    type: 'normal',
   },
   {
     id: 2,
@@ -37,7 +23,7 @@ const chatMessages = [
     message: '채팅 규칙 안내드립니다.',
     time: '3분 전',
     type: 'mod',
-    badge: '매니저'
+    badge: '매니저',
   },
   {
     id: 3,
@@ -45,8 +31,8 @@ const chatMessages = [
     message: '새로운 구독자입니다!',
     time: '5분 전',
     type: 'subscription',
-    badge: '구독자'
-  }
+    badge: '구독자',
+  },
 ];
 
 export default function ChatPage() {
@@ -97,7 +83,8 @@ export default function ChatPage() {
                     </SelectContent>
                   </Select>
                   <div className="relative">
-                    <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <Search
+                      className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       placeholder="채팅 검색"
                       className="pl-8 w-[200px]"

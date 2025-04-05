@@ -5,21 +5,8 @@ import { BroadcastForm } from './_components/broadcast-form';
 import { BroadcastPlayer } from './_components/broadcast-player';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-import { 
-  Settings, 
-  Users, 
-  MessageSquare, 
-  Copy, 
-  Eye, 
-  Signal, 
-  Timer,
-  AlertCircle,
-  PanelRightClose,
-  ChevronRight,
-  ChevronLeft
-} from 'lucide-react';
+import { ChevronRight, Eye, MessageSquare, Timer, Users } from 'lucide-react';
 
 export default function BroadcastPage() {
   const [activePanel, setActivePanel] = useState<'chat' | 'viewers' | null>(null);
@@ -31,8 +18,8 @@ export default function BroadcastPage() {
   return (
     <div className="h-full relative">
       <div className={cn(
-        "h-full transition-[padding] duration-300",
-        activePanel !== null && "pr-[400px]"
+        'h-full transition-[padding] duration-300',
+        activePanel !== null && 'pr-[400px]',
       )}>
         <div className="h-full p-6">
           <div className="max-w-[1600px] mx-auto flex flex-col gap-6">
@@ -62,7 +49,7 @@ export default function BroadcastPage() {
             </div>
 
             <BroadcastPlayer />
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <Card>
                 <CardContent className="p-4">
@@ -77,7 +64,7 @@ export default function BroadcastPage() {
                   </div>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3">
@@ -91,7 +78,7 @@ export default function BroadcastPage() {
                   </div>
                 </CardContent>
               </Card>
-              
+
               <Card>
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3">
@@ -119,10 +106,10 @@ export default function BroadcastPage() {
         </div>
       </div>
 
-      <div 
+      <div
         className={cn(
-          "fixed top-[64px] right-0 w-[400px] h-full bg-background border-l transition-transform duration-300",
-          activePanel === null && "translate-x-full"
+          'fixed top-[64px] right-0 w-[400px] h-full bg-background border-l transition-transform duration-300',
+          activePanel === null && 'translate-x-full',
         )}
       >
         <div className="h-full flex flex-col">

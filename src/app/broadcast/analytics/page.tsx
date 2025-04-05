@@ -1,24 +1,10 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import {
-  TrendingUp,
-  Users,
-  Clock,
-  Heart,
-  Star,
-  Calendar,
-  Download
-} from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Calendar, Clock, Download, Heart, TrendingUp, Users } from 'lucide-react';
 
 // 임시 데이터
 const periodStats = [
@@ -26,26 +12,26 @@ const periodStats = [
     label: '총 시청 시간',
     value: '2,345시간',
     change: '+15%',
-    icon: Clock
+    icon: Clock,
   },
   {
     label: '평균 시청자',
     value: '1,234명',
     change: '+12%',
-    icon: Users
+    icon: Users,
   },
   {
     label: '최대 시청자',
     value: '3,456명',
     change: '+25%',
-    icon: TrendingUp
+    icon: TrendingUp,
   },
   {
     label: '신규 팔로워',
     value: '789명',
     change: '+8%',
-    icon: Heart
-  }
+    icon: Heart,
+  },
 ];
 
 export default function AnalyticsPage() {

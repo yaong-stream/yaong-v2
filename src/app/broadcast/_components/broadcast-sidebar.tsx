@@ -3,55 +3,40 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import {
-  LayoutDashboard,
-  Settings,
-  MessageSquare,
-  Users,
-  BarChart,
-  Video,
-  X
-} from 'lucide-react';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetClose
-} from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
+import { BarChart, LayoutDashboard, MessageSquare, Settings, Users, Video } from 'lucide-react';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 
 const menuItems = [
   {
     label: '방송 화면',
     href: '/broadcast',
-    icon: Video
+    icon: Video,
   },
   {
     label: '대시보드',
     href: '/broadcast/dashboard',
-    icon: LayoutDashboard
+    icon: LayoutDashboard,
   },
   {
     label: '채팅 관리',
     href: '/broadcast/chat',
-    icon: MessageSquare
+    icon: MessageSquare,
   },
   {
     label: '시청자 관리',
     href: '/broadcast/viewers',
-    icon: Users
+    icon: Users,
   },
   {
     label: '통계',
     href: '/broadcast/analytics',
-    icon: BarChart
+    icon: BarChart,
   },
   {
     label: '설정',
     href: '/broadcast/settings',
-    icon: Settings
-  }
+    icon: Settings,
+  },
 ];
 
 interface BroadcastSidebarProps {
@@ -67,7 +52,7 @@ export function BroadcastSidebar({ isOpen, onClose }: BroadcastSidebarProps) {
       {menuItems.map((item) => {
         const isActive = pathname === item.href;
         const Icon = item.icon;
-        
+
         return (
           <Link
             key={item.href}
@@ -75,9 +60,9 @@ export function BroadcastSidebar({ isOpen, onClose }: BroadcastSidebarProps) {
             onClick={onClose}
             className={cn(
               'flex items-center gap-3 px-3 py-2 rounded-md text-sm transition-colors',
-              isActive 
-                ? 'bg-primary text-primary-foreground' 
-                : 'hover:bg-muted'
+              isActive
+                ? 'bg-primary text-primary-foreground'
+                : 'hover:bg-muted',
             )}
           >
             <Icon className="w-4 h-4" />

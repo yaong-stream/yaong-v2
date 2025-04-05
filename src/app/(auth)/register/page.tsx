@@ -1,11 +1,11 @@
 'use client';
 
-import Link from "next/link";
-import { RegisterForm } from "./_components/register-form";
-import { useSignup } from "@/hooks/api/member/mutations";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { useState } from "react";
+import Link from 'next/link';
+import { RegisterForm } from './_components/register-form';
+import { useSignup } from '@/hooks/api/member/mutations';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { useState } from 'react';
 
 export default function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,13 +18,13 @@ export default function RegisterPage() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const email = formData.get("email") as string;
-      const password = formData.get("password") as string;
-      const confirmPassword = formData.get("confirmPassword") as string;
-      const nickname = formData.get("username") as string;
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      const confirmPassword = formData.get('confirmPassword') as string;
+      const nickname = formData.get('username') as string;
 
       if (password !== confirmPassword) {
-        toast.error("비밀번호가 일치하지 않습니다.");
+        toast.error('비밀번호가 일치하지 않습니다.');
         return;
       }
 
@@ -34,10 +34,10 @@ export default function RegisterPage() {
         nickname,
       });
 
-      toast.success("회원가입이 완료되었습니다.");
-      router.push("/login");
+      toast.success('회원가입이 완료되었습니다.');
+      router.push('/login');
     } catch (error) {
-      toast.error("회원가입에 실패했습니다. 다시 시도해주세요.");
+      toast.error('회원가입에 실패했습니다. 다시 시도해주세요.');
       console.error(error);
     } finally {
       setIsLoading(false);

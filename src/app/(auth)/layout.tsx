@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function AuthLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
@@ -10,8 +10,8 @@ export default function AuthLayout({
       <div className="w-full max-w-md space-y-8">
         {/* 로고 */}
         <div className="flex flex-col items-center">
-          <Link 
-            href="/" 
+          <Link
+            href="/"
             className="text-2xl font-bold text-primary hover:text-primary/90"
           >
             야옹 스트림

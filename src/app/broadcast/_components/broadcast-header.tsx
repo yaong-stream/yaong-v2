@@ -20,9 +20,9 @@ export function BroadcastHeader({ onMenuClick }: BroadcastHeaderProps) {
   return (
     <header className="h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-full items-center px-4 gap-4">
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           className="lg:hidden"
           onClick={onMenuClick}
         >
