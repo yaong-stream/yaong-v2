@@ -16,14 +16,16 @@ export default function StreamPage() {
     return <p>loading...</p>
   }
   return (
-    <div className="h-full text-foreground">
+    <div className="container px-6 py-8 text-foreground">
       {/* 데스크톱 레이아웃 */}
-      <div className="hidden md:flex h-full">
+      <div className="hidden md:flex h-full gap-4">
         {/* 스트림 플레이어 영역 */}
         <div className="flex-1 bg-background overflow-y-auto">
-          <StreamPlayer
-            stream={data}
-          />
+          <div>
+            <StreamPlayer
+              stream={data}
+            />
+          </div>
         </div>
         {/* 채팅 영역 */}
         <div className="w-80 bg-muted border-l border-border flex-shrink-0 h-full">
@@ -40,9 +42,8 @@ export default function StreamPage() {
           />
         </div>
         {/* 채팅 영역 */}
-        <div className={`bg-muted border-t border-border transition-all duration-300 ease-in-out ${
-          isChatOpen ? 'h-[300px]' : 'h-12'
-        }`}>
+        <div className={`bg-muted border-t border-border transition-all duration-300 ease-in-out ${isChatOpen ? 'h-[300px]' : 'h-12'
+          }`}>
           {/* 채팅 토글 버튼 */}
           <button
             onClick={() => setIsChatOpen(!isChatOpen)}

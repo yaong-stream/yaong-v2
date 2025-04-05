@@ -19,7 +19,7 @@ export default function HomePage() {
   const { data: streams, isLoading: isStreamsLoading } = useLiveStreams();
 
   return (
-    <div className="container mx-auto px-2 sm:px-4 py-4 sm:py-6">
+    <div className="container px-6 py-8">
       {/* 인기 라이브 스트림 섹션 */}
       <section className="mb-6 sm:mb-8">
         <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">인기 라이브 스트림</h2>
