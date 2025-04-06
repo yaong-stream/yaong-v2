@@ -1,9 +1,13 @@
 import { httpClient } from '@/lib';
 import {
-  Member,
   MEMBER_API_PATHS,
+  MemberInfoResponse,
   SignupRequest,
   SignupResponse,
+  UpdateMeRequest,
+  UpdateMeResponse,
+  UpdatePasswordRequest,
+  UpdatePasswordResponse,
   WithdrawRequest,
   WithdrawResponse,
 } from './member.types';
@@ -19,6 +23,16 @@ export async function withdraw(data: WithdrawRequest): Promise<WithdrawResponse>
 }
 
 export async function getMe() {
-  const response = await httpClient.get<Member>(MEMBER_API_PATHS.ME);
+  const response = await httpClient.get<MemberInfoResponse>(MEMBER_API_PATHS.ME);
+  return response.data;
+}
+
+export async function updateMe(data: UpdateMeRequest): Promise<UpdateMeResponse> {
+  const response = await httpClient.patch<UpdateMeResponse>(MEMBER_API_PATHS.ME, data);
+  return response.data;
+}
+
+export async function updatePassword(data: UpdatePasswordRequest): Promise<UpdatePasswordResponse> {
+  const response = await httpClient.patch<UpdatePasswordResponse>(MEMBER_API_PATHS.PASSWORD, data);
   return response.data;
 }

@@ -29,7 +29,7 @@ export function Sidebar() {
         toggleSidebar(!isTabletMin);
       }
     }
-  }, [width]); // toggleSidebar 의존성 제거
+  }, [width, toggleSidebar, isMaualSidebarOpen]); // toggleSidebar 의존성 제거
 
   const handleOverlayClick = useCallback(() => {
     toggleSidebar(false);

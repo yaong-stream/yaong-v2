@@ -26,7 +26,7 @@ type ChatMessage = {
 }
 
 export const StreamChat = ({ streamId }: StreamChatProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen] = useState(true);
   const socketRef = useRef<Socket>(null);
   const [chats, setChats] = useState<ChatMessage[]>([]);
   const { register, handleSubmit, reset, } = useForm<ChatMessageForm>();

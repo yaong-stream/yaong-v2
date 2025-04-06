@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { StreamPlayer } from "./_components/stream-player";
 import { StreamChat } from "./_components/stream-chat";
 import { useParams } from "next/navigation";
 import { useStream } from "@/hooks/api/stream";
-import { ChevronUp, ChevronDown } from "lucide-react";
 import { StreamInfo } from "./_components/stream-info";
 import { ChannelTabs } from "./_components/channel-tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -13,7 +11,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 export default function StreamPage() {
   const { streamer } = useParams();
   const { isLoading, data } = useStream(streamer?.toString() || '');
-  const [isChatOpen, setIsChatOpen] = useState(true);
 
   if (isLoading || data == null) {
     return <p>loading...</p>
