@@ -6,6 +6,9 @@ import { StreamChat } from "./_components/stream-chat";
 import { useParams } from "next/navigation";
 import { useStream } from "@/hooks/api/stream";
 import { ChevronUp, ChevronDown } from "lucide-react";
+import { StreamInfo } from "./_components/stream-info";
+import { ChannelTabs } from "./_components/channel-tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function StreamPage() {
   const { streamer } = useParams();
@@ -16,35 +19,37 @@ export default function StreamPage() {
     return <p>loading...</p>
   }
   return (
-    <div className="container px-6 py-8 text-foreground">
+    <div className="h-full text-foreground">
       {/* 데스크톱 레이아웃 */}
-      <div className="hidden md:flex h-full gap-4">
+      <div className="flex flex-col md:flex-row h-full">
         {/* 스트림 플레이어 영역 */}
-        <div className="flex-1 bg-background overflow-y-auto">
-          <div>
-            <StreamPlayer
-              stream={data}
-            />
+        <ScrollArea className="md:flex-1 bg-background pr-2">
+          <StreamPlayer
+            stream={data}
+          />
+          <div className="hidden md:flex flex-col">
+            <StreamInfo stream={data} />
+            <ChannelTabs stream={data} />
           </div>
-        </div>
+        </ScrollArea>
         {/* 채팅 영역 */}
-        <div className="w-80 bg-muted border-l border-border flex-shrink-0 h-full">
-          <StreamChat streamId={data.id} />
+        <div className="flex-1 md:flex-none md:w-80 md:h-full bg-muted border-l border-border flex-shrink-0">
+          <StreamChat streamId={data.id}/>
         </div>
       </div>
 
-      {/* 모바일 레이아웃 */}
-      <div className="md:hidden flex flex-col h-full overflow-y-hidden">
-        {/* 스트림 플레이어 영역 */}
+
+      {/* <div className="md:hidden flex flex-col h-full overflow-y-hidden">
+       
         <div className="flex-1 bg-background overflow-y-auto">
           <StreamPlayer
             stream={data}
           />
         </div>
-        {/* 채팅 영역 */}
+    
         <div className={`bg-muted border-t border-border transition-all duration-300 ease-in-out ${isChatOpen ? 'h-[300px]' : 'h-12'
           }`}>
-          {/* 채팅 토글 버튼 */}
+    
           <button
             onClick={() => setIsChatOpen(!isChatOpen)}
             className="w-full h-12 flex items-center justify-center gap-2 hover:bg-accent/50 relative"
@@ -58,12 +63,13 @@ export default function StreamPage() {
               )}
             </div>
           </button>
-          {/* 채팅 내용 */}
+         
           <div className={`${isChatOpen ? 'block' : 'hidden'} h-[calc(300px-48px)]`}>
             <StreamChat streamId={data.id} />
           </div>
         </div>
-      </div>
+
+      </div> */}
     </div>
   )
 } 

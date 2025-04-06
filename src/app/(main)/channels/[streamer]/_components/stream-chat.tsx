@@ -6,6 +6,7 @@ import { UserAvatar } from "@/components/user-avatar"
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface StreamChatProps {
   streamId: number;
@@ -25,6 +26,7 @@ type ChatMessage = {
 }
 
 export const StreamChat = ({ streamId }: StreamChatProps) => {
+  const [isOpen, setIsOpen] = useState(true);
   const socketRef = useRef<Socket>(null);
   const [chats, setChats] = useState<ChatMessage[]>([]);
   const { register, handleSubmit, reset, } = useForm<ChatMessageForm>();
@@ -51,12 +53,24 @@ export const StreamChat = ({ streamId }: StreamChatProps) => {
       }
     };
   }, [streamId]);
+
+
   return (
     <div className="flex flex-col h-full">
       {/* 채팅 헤더 */}
-      <div className="hidden md:block p-4 border-b border-border">
+      <div className="flex flex-row items-center p-4 border-b border-border">
+        <Button
+          variant="ghost"
+          size="icon">
+          {isOpen ? (
+            <ChevronLeft className="h-5 w-5" />
+          ) : (
+            <ChevronRight className="h-5 w-5" />
+          )}
+        </Button>
         <h3 className="text-lg font-semibold text-foreground">스트림 채팅</h3>
       </div>
+
 
       {/* 채팅 메시지 영역 */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
