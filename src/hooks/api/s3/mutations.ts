@@ -4,7 +4,6 @@ import {
   CreatePresignedUrlResponse,
   uploadFile,
   UploadFileRequest,
-  UploadFileResponse,
 } from "@/services";
 import {
   useMutation,

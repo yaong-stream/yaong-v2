@@ -14,7 +14,7 @@ import { MemberInfoResponse } from '@/services';
 import { useForm } from 'react-hook-form';
 import { Loader2, Pencil, Upload } from 'lucide-react';
 import { toast } from 'sonner';
-import { useState, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useCreatePresignedUrl, useUpdateMe, useUploadFile } from '@/hooks/api';
 
@@ -34,28 +34,25 @@ export function EditProfileDialog({ member }: EditProfileDialogProps) {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(member.profileImage || null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<EditProfileFormData>({
+  const { register, handleSubmit, watch, formState: { errors } } = useForm<EditProfileFormData>({
     defaultValues: {
       nickname: member.nickname,
     },
   });
 
-  const handleImageClick = () => {
-    fileInputRef.current?.click();
-  };
+  const profileImageFile = watch('profileImage');
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
+  useEffect(() => {
+    if(profileImageFile && profileImageFile.length > 0) {
+      const file = profileImageFile[0];
       const reader = new FileReader();
       reader.onloadend = () => {
         setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
-  };
+  }, [profileImageFile]);
 
   const onSubmit = async (data: EditProfileFormData) => {
     setIsLoading(true);
@@ -82,6 +79,7 @@ export function EditProfileDialog({ member }: EditProfileDialogProps) {
       toast.success('프로필이 수정되었습니다.');
       setOpen(false);
     } catch (error) {
+      console.error(error);
       toast.error('프로필 수정에 실패했습니다.');
     } finally {
       setIsLoading(false);
@@ -103,10 +101,15 @@ export function EditProfileDialog({ member }: EditProfileDialogProps) {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-4">
             <div className="flex flex-col items-center gap-4">
-              <div
-                onClick={handleImageClick}
+              <label
                 className="relative h-32 w-32 rounded-full overflow-hidden border-2 border-border cursor-pointer hover:opacity-90 transition-opacity group"
               >
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  {...register('profileImage')}
+                />
                 {previewImage ? (
                   <>
                     <Image
@@ -124,16 +127,10 @@ export function EditProfileDialog({ member }: EditProfileDialogProps) {
                     <Upload className="h-8 w-8 text-muted-foreground" />
                   </div>
                 )}
-              </div>
-              <label className="text-sm text-muted-foreground">
-                클릭하여 이미지 변경
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  {...register('profileImage')}
-                />
               </label>
+              <div className="text-sm text-muted-foreground">
+                클릭하여 이미지 변경
+              </div>
             </div>
           </div>
           <div className="space-y-2">

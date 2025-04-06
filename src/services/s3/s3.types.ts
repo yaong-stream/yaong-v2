@@ -13,10 +13,6 @@ export interface UploadFileRequest {
   file: File;
 }
 
-export interface UploadFileResponse {
-  success: boolean;
-}
-
 export const S3_API_PATHS = {
   CREATE_PRESIGNED_URL: '/api/v1/s3',
 } as const;
