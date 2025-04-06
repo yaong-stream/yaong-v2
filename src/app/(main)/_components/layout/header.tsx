@@ -30,11 +30,12 @@ import {
   useSignout,
 } from '@/hooks/api';
 import { useStore } from '@/store/store';
-import { selectIsSidebarOpen, selectToggleMaualSidebar } from '@/store/ui';
+import { selectIsSidebarOpen, selectToggleMaualSidebar, selectToggleSidebar } from '@/store/ui';
 
 export function Header() {
   const isSidebarOpen = useStore(selectIsSidebarOpen);
   const toggleMaualSidebar = useStore(selectToggleMaualSidebar);
+  const toggleSidebar = useStore(selectToggleSidebar);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const { isLoading, data } = useMe();
   const { mutateAsync: signout } = useSignout();
@@ -49,7 +50,7 @@ export function Header() {
     <header className="h-14 border-b border-border bg-card">
       <div className="h-full flex items-center px-4 lg:px-6">
         <button
-          onClick={() => toggleMaualSidebar()}
+          onClick={() => toggleSidebar()}
           className="lg:hidden mr-4 p-2 hover:bg-accent/50 rounded-md"
         >
           <Menu className="h-5 w-5" />
