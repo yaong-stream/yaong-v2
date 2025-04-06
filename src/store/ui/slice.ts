@@ -22,7 +22,7 @@ export type UISlice = UISliceState & UISliceActions;
 
 // Initial State
 const initialState: UISliceState = {
-  isSidebarOpen: true,
+  isSidebarOpen: false,
   isMaualSidebarOpen: true,
 };
 

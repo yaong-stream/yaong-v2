@@ -6,14 +6,11 @@ import { UISlice, createUISlice } from './ui';
 
 type Store = UISlice;
 
-type PersistedState = Pick<Store, 'isSidebarOpen'>;
+type PersistedState = Pick<Store, 'isMaualSidebarOpen'>;
 
 const persistOptions: PersistOptions<Store, PersistedState> = {
   name: 'yaong-storage',
   storage: createJSONStorage(() => localStorage),
-  partialize: (state) => ({
-    isSidebarOpen: state.isSidebarOpen,
-  }),
 };
 
 export const useStore = create<Store>()(
