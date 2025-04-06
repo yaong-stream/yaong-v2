@@ -146,15 +146,6 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground antialiased;
-  }
-}
-
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -226,9 +217,13 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+
+  html {
+    overflow-y: hidden;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 }
