@@ -7,6 +7,15 @@ settings:
 importers:
 
   .:
+    devDependencies:
+      '@types/node':
+        specifier: ^20.11.30
+        version: 20.17.30
+      typescript:
+        specifier: ^5.4.2
+        version: 5.8.2
+
+  apps/web:
     dependencies:
       '@hookform/resolvers':
         specifier: ^4.1.3
