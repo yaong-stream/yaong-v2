@@ -1,8 +1,13 @@
 import {
   Module,
 } from "@nestjs/common";
+import {
+  ConfigRegister,
+} from "./configures";
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigRegister,
+  ],
 })
 export class AppModule { }
